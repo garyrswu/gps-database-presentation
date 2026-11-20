@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GPS/GNSS Simulator | Database Architecture</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1222;--panel:#152238;--line:#2a405e;--muted:#aabbd3;--blue:#7dc9ff}*{box-sizing:border-box}body{margin:0;background:#080e19;color:#f5f9ff;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.deck{max-width:1250px;margin:30px auto;background:var(--bg);border:1px solid #233651;border-radius:20px;overflow:hidden;box-shadow:0 22px 90px #0008}.slide{padding:clamp(22px,4vw,54px);min-height:650px}.eyebrow{font-size:12px;letter-spacing:2.6px;color:#6cb9ff;font-weight:800}h1{font-size:clamp(32px,4.3vw,52px);line-height:1.12;letter-spacing:-1.6px;margin:14px 0 10px}.sub{color:#9baec9;font-size:16px;margin:0 0 34px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:19px}.step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;justify-content:center;min-height:142px}.step .emoji{font-size:32px}.step strong{font-size:16px}.step small{font-size:13px;line-height:1.55;color:var(--muted)}.flowline{display:grid;grid-template-columns:1fr 35px 1fr 35px 1.35fr;align-items:center;gap:9px}.arrow{text-align:center;color:#65b9ff;font-size:28px}.tables{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:13px}.tables .panel{text-align:center}.tables b{font-size:14px;color:var(--blue)}.tables p{font-size:12px;color:var(--muted);margin:7px 0 0}.down{text-align:center;color:#72bfff;font-size:28px;padding:12px}.services{display:grid;grid-template-columns:1fr 1fr;gap:13px}.achievement-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.achievement{display:flex;gap:15px;align-items:flex-start;padding:19px;border:1px solid #2b3c57;border-radius:14px;background:#142138}.achievement .symbol{font-size:27px;flex:none}.achievement b{display:block;font-size:16px;margin-bottom:7px}.achievement p{font-size:14px;color:#afc0d6;line-height:1.6;margin:0}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}.metric{text-align:center}.metric b{font-size:34px;color:var(--blue);display:block}.metric span{font-size:12px;color:var(--muted)}.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 28px;border-top:1px solid #263750;background:#101a2d}.nav .footer{font-size:12px;color:#91a8c4}.controls{display:flex;align-items:center;gap:10px}.dots{display:flex;gap:7px;margin-right:8px}.dot{height:8px;width:8px;border-radius:50%;background:#3b526f}.dot.active{background:#74c2ff;width:24px;border-radius:6px}button{border:1px solid #41668d;border-radius:9px;padding:10px 17px;color:#e4f2ff;background:#1c3555;cursor:pointer;font-size:14px}button:hover:not(:disabled){background:#2b507a}button:disabled{opacity:.3;cursor:default}[hidden]{display:none!important}@media(max-width:700px){.deck{margin:0;border-radius:0}.slide{min-height:auto}.flowline{display:flex;flex-direction:column}.flowline>.panel{width:100%}.arrow{transform:rotate(90deg)}.tables{grid-template-columns:1fr}.services,.achievement-grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.nav{padding:14px}.nav .footer{display:none}}@media print{body{background:#fff}.deck{margin:0;max-width:none;box-shadow:none;border:0}.slide{display:block!important;page-break-after:always;min-height:95vh}.nav{display:none}}
+</style>
+</head>
+<body>
+<main class="deck" id="deck">
+<section class="slide" data-slide="0" aria-label="Database architecture">
+<div class="eyebrow">SENIOR DESIGN PROJECT · DATABASE SYSTEM</div>
+<h1>Database Architecture</h1>
+<p class="sub">From raw satellite orbit files to GPS positioning accuracy analysis</p>
+<div class="flowline">
+<div class="panel step"><span class="emoji">🛰️</span><strong>NOAA CORS / SP3</strong><small>Satellite orbit data<br>Timestamps · X/Y/Z coordinates</small></div>
+<div class="arrow">➜</div>
+<div class="panel step"><span class="emoji">⚙️</span><strong>Python Data Pipeline</strong><small>Download · Parse · Import<br>Structured orbital records</small></div>
+<div class="arrow">➜</div>
+<div class="panel step" style="border-color:#428cce;background:#142d4b"><span class="emoji">🗄️</span><strong>PostgreSQL + TimescaleDB</strong><small>Time-series storage and queries</small></div>
+</div>
+<div class="tables">
+<div class="panel"><b>satellites</b><p>Satellite identifiers</p></div>
+<div class="panel"><b>satellite_states</b><p>Timestamped X/Y/Z coordinates</p></div>
+<div class="panel"><b>simulation_results</b><p>DOP metrics and simulation scenarios</p></div>
+</div>
+<div class="down">↕</div>
+<div class="services">
+<div class="panel step"><span class="emoji">🧮</span><strong>FastAPI + DOP Calculation Service</strong><small>Queries satellite positions · Computes five DOP metrics · Stores results</small></div>
+<div class="panel step"><span class="emoji">🖥️</span><strong>Frontend Application</strong><small>Consumes API results for simulation and visualization</small></div>
+</div>
+</section>
+<section class="slide" data-slide="1" aria-label="Major accomplishments" hidden>
+<div class="eyebrow">SENIOR DESIGN PROJECT · ENGINEERING MILESTONES</div>
+<h1>Major Accomplishments</h1>
+<p class="sub">Built the database infrastructure for satellite geometry simulations</p>
+<div class="achievement-grid">
+<div class="achievement"><span class="symbol">🗄️</span><div><b>Database Design</b><p>Designed relational tables for satellites, orbital states, and simulation results, with keys and constraints.</p></div></div>
+<div class="achievement"><span class="symbol">🛰️</span><div><b>Automated Data Ingestion</b><p>Built Python scripts to download, parse, and import SP3 satellite orbit data.</p></div></div>
+<div class="achievement"><span class="symbol">⏱️</span><div><b>Time-Series Management</b><p>Integrated TimescaleDB for timestamp-based satellite position storage and retrieval.</p></div></div>
+<div class="achievement"><span class="symbol">📐</span><div><b>Five DOP Measurements</b><p>Extended the results schema to support PDOP, GDOP, HDOP, VDOP, and TDOP.</p></div></div>
+<div class="achievement"><span class="symbol">🛡️</span><div><b>Data Integrity & Migration</b><p>Implemented UPSERT operations and a migration for existing databases to add new metrics.</p></div></div>
+<div class="achievement"><span class="symbol">🐳</span><div><b>Docker & API Integration</b><p>Containerized the database and connected it to FastAPI and the calculation service.</p></div></div>
+</div>
+<div class="metrics"><div class="panel metric"><b>3.1M+</b><span>Previously observed simulation result rows</span></div><div class="panel metric"><b>5</b><span>DOP metrics supported</span></div><div class="panel metric"><b>9/9</b><span>Integration results written and retrieved</span></div></div>
+</section>
+<footer class="nav"><span class="footer">GPS/GNSS Simulator · Database Backend</span><div class="controls"><div class="dots"><span class="dot active"></span><span class="dot"></span></div><button id="prev" disabled>← Previous</button><button id="next">Next →</button></div></footer>
+</main>
+<script>
+(()=>{const slides=[...document.querySelectorAll('[data-slide]')],dots=[...document.querySelectorAll('.dot')],prev=document.getElementById('prev'),next=document.getElementById('next');let current=0;function render(){slides.forEach((s,i)=>s.hidden=i!==current);dots.forEach((d,i)=>d.classList.toggle('active',i===current));prev.disabled=current===0;next.disabled=current===slides.length-1}prev.addEventListener('click',()=>{current=Math.max(0,current-1);render()});next.addEventListener('click',()=>{current=Math.min(slides.length-1,current+1);render()});document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&!next.disabled)next.click();if(e.key==='ArrowLeft'&&!prev.disabled)prev.click()});render()})();
+</script>
+</body></html>
